@@ -1,4 +1,4 @@
-package com.github.mahesh.jsonlib.core;
+package com.github.mahesh.jsonlib.core.lexer;
 
 
 

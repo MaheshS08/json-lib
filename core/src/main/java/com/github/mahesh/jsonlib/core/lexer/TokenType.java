@@ -1,6 +1,4 @@
-package com.github.mahesh.jsonlib.core;
-
-import java.io.Closeable;
+package com.github.mahesh.jsonlib.core.lexer;
 
 /**
  * Types of tokens emitted by the Tokenizer during lexing.
