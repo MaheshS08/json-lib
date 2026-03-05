@@ -69,7 +69,41 @@ public final class JsonTokenizer {
      */
     public Token nextToken() {
         // Implementation will be added step by step
-        return new Token(TokenType.EOF, null, position);
+
+        skipWhitespace();
+
+        if (isEnd()) {
+            return new Token(TokenType.EOF, null, position);
+        }
+        int start = position;
+        char c = peek();
+        return switch (c) {
+            case '{' -> {
+                advance();
+                yield new Token(TokenType.LEFT_BRACE, "{", start);
+            }
+            case '}' -> {
+                advance();
+                yield new Token(TokenType.RIGHT_BRACE, "}", start);
+            }
+            case '[' -> {
+                advance();
+                yield new Token(TokenType.LEFT_BRACKET, "[", start);
+            }
+            case ']' -> {
+                advance();
+                yield new Token(TokenType.RIGHT_BRACKET, "]", start);
+            }
+            case ':' -> {
+                advance();
+                yield new Token(TokenType.COLON, ":", start);
+            }
+            case ',' -> {
+                advance();
+                yield new Token(TokenType.COMMA, ",", start);
+            }
+            default -> throw new IllegalStateException("Unexpected character '" + c + "' at position " + position);
+        };
     }
 
     /**
